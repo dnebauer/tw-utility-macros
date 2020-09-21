@@ -1,0 +1,11 @@
+{
+	"title": "$:/plugins/.dtn/utility-macros",
+	"description": "Utility macros used by David Nebauer",
+	"author": "David Nebauer",
+	"version": "0.0.1",
+	"core-version": ">=5.1.21",
+	"source": "https://github.com/dnebauer/tw-utility-macros",
+	"list": "readme license",
+	"dependents": "",
+	"plugin-type": "plugin"
+}

@@ -1,0 +1,11 @@
+created: 20190407071638782
+modified: 20200921110339524
+tags: $:/tags/Macro
+title: $:/plugins/.dtn/utility-macros/home-path-link/macros
+type: text/vnd.tiddlywiki
+
+\define home-path-link-helper-url() $(home-root-url)$/$(home-rel-path)$
+\define home-path-link-helper-path() $HOME/$(home-rel-path)$
+\define home-path-link(path)
+<$vars home-root-url={{$:/plugins/.dtn/utility-macros/home-path-link/config!!local-url}} home-rel-path=<<__path__>> ><$macrocall $name=".dlink-ex" to=<<home-path-link-helper-url>> _=<<home-path-link-helper-path>>/></$vars>
+\end

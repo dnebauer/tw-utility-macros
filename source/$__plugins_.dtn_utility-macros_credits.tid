@@ -1,0 +1,9 @@
+created: 20200921131708992
+modified: 20200921132751275
+tags: 
+title: $:/plugins/.dtn/utility-macros/credits
+type: text/vnd.tiddlywiki
+
+The javascript module providing the "number-format" macro is based on a post by Eric Shulman to tiddlywiki google group (see [[https://groups.google.com/g/tiddlywiki/c/avkbQnEd1UI/m/_sz6sEeFBwAJ]]).
+
+I regret that any antecedents to the other macros in this collection have long receded into the mists of memory. I apologise to anyone whose work I have failed to acknowledge -- please let me know and I will do my best to rectify the omission.

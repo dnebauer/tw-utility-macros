@@ -1,0 +1,11 @@
+created: 20190406070252330
+modified: 20200921110603111
+tags: $:/tags/Macro
+title: $:/plugins/.dtn/utility-macros/check-var-or-macro
+type: text/vnd.tiddlywiki
+
+\define check-var-or-macro(var)
+<$list filter="[[$var$]] +[is[variable]]" emptyMessage="Undefined variable or macro '$var$'">
+<<emptyNonExistentMessage>>
+</$list>
+\end

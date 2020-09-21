@@ -1,0 +1,235 @@
+created: 20200921131642265
+modified: 20200921140907972
+tags: 
+title: $:/plugins/.dtn/utility-macros/readme
+type: text/vnd.tiddlywiki
+
+This plugin provides the following macros:
+
+* check-var-or-macro -- check whether macro-or variable exists
+* home-path-link -- display hyperlink to a path in user's home directory
+* list-item-space -- add vertical space after a list item
+* number-format -- format a number.
+
+Details of each macro are given below.
+
+---
+
+! check-var-or-macro(var)
+
+!! Use
+
+Test for the existence of a variable or macro, and displays an error message if it is not. It is intended to be used at the top of a tiddler that uses a custom macro to inform the user if the macro is not available.
+
+!! Requirements
+
+Tiddlywiki 5.1.20 or greater as it uses the `[is[variable]]` subfilter operator introduced in that version.
+
+!! Parameters
+
+; var
+
+: name of the variable or macro to check for the existence of
+
+!! Returns
+
+Nothing if the variable or macros exists.
+
+The following message if the variable or macros does not exist:
+
+> Undefined variable or macro 'NAME'
+
+!! Tiddlers
+
+* [[$:/plugins/.dtn/utility-macros/check-var-or-macro]]: macro definition.
+
+---
+
+! home-path-link(path)
+
+!! Use
+
+Display a hyperlink to a path in a user's home directory in which:
+
+* The link text represents the home directory as $HOME to give the link some generality, but
+* The link itself uses the actual $HOME directory in its path, and
+* The single parameter provided to the macro is the path relative to the home directory (do not include a leading slash).
+
+The user's home directory must be specified in the //text// and //local-url// fields of [[$:/plugins/.dtn/utility-macros/home-path-link/config]].
+
+!! Requirements
+
+The core macro `.dlink-ex` is used to generate the link.
+
+!! Parameters
+
+; path
+
+: path of file relative to user's home directory (with no leading slash)
+
+!! Returns
+
+A formatted hyperlink in which the home directory is replaced in the link text by `$HOME`.
+
+!! Example
+
+Suppose the acme program has a configuration file called `.acmerc` in the user's home directory.
+
+The macro call:
+
+```
+<<home-path-link ".acmerc">>
+```
+
+results in:
+
+```html
+<a class="tc-tiddlylink-external" href="file:///home/abraham/.acmerc" rel="noopener noreferrer" target="_blank"><dfn class="doc-def">$HOME/.acmerc</dfn></a>
+```
+
+!! Tiddlers
+
+* [[$:/plugins/.dtn/utility-macros/home-path-link/macros]]: define macros
+* [[$:/plugins/.dtn/utility-macros/home-path-link/config]]: configure user's home directory:
+** The path, e.g., `/home/abraham`, is defined in the tiddler body
+** The corresponding url, e.g., `file:///home/abraham`, is defined in tiddler    field //local-url//.
+
+---
+
+! list-item-space()
+
+!! Use
+
+Insert an empty `div` element:
+
+```html
+<div>&nbsp;</div>
+```
+
+Used for achieving balanced lists where some items are followed by multi-paragraph content wrapped in a div. This macro can be used to ensure visually consistent inter-item space is added to items which are not followed by additional content.
+
+!! Requirements
+
+Nil.
+
+!! Parameters
+
+Nil.
+
+!! Returns
+
+An empty div as decribed above.
+
+!! Example
+
+```
+* A list item which needs an extra line to follow it<<list-item-space>>
+```
+
+!! Tiddlers
+
+* [[$:/plugins/.dtn/utility-macros/list-item-space]]: macro definition.
+
+---
+
+! number-format(value, [...])
+
+!! Use
+
+Format a number.
+
+!! Requirements
+
+Uses the Intl.~NumberFormat javascript function.
+
+!! Parameters
+
+The most used parameters are //value// and //style//, followed by //country// and //currency//.<!-- The remaining parameters are used less frequently.--> There are additional properties of the Intl.~NumberFormat function that could be mapped as parameters, but doing so results in "uncaught reference" errors.
+
+; value
+
+: number to be formatted
+
+; style
+
+: formatting style to use: //decimal// for plain number formatting (default), //currency// for currency formatting, //percent// for percent formatting, //unit// for unit formatting
+
+; country
+
+: a [[unicode BCP 47 locale identifier|https://www.unicode.org/reports/tr35/tr35.html#BCP_47_Conformance]], the easiest type of which is a country language code, default = "en-AU"
+
+; currency
+
+: required if style = 'currency', use an [[ISO-defined currency code|http://www.currency-iso.org/en/home/tables/table-a1.html]], default = "AUD"
+
+<!--; compactDisplay
+
+: used when notation = 'compact': //short// is not explained (default), //long// is not explained
+
+; currencyDisplay
+
+: how to display the currency: //symbol// to use a localized currency symbol such as $ (default), //narrowSymbol// to use narrow format symbol, e.g., "$100" rather than "US$100", //code// to use the ISO currency code, //name// to use a localized currency name such as "dollar"
+
+; currencySign
+
+: how to signify a negative amount: //standard// to use minus sign (default), //accounting// to use locale's accounting practice, e.g., parentheses
+
+; localeMatcher
+
+: locale matching algorithm to use: //best fit// is not explained (default), //lookup// is not explained
+
+; notation
+
+: formatting that should be displayed for the number: //standard// is plain number formatting (default), //scientific// returns the order-of-magnitude for formatted number, //engineering// returns the exponent of ten when divisible by three, //compact// string representing exponent, see compactDisplay
+
+; numberingSystem
+
+: numbering system: no default, possible values include: "arab", "arabext", " bali", "beng", "deva", "fullwide", " gujr", "guru", "hanidec", "khmr", " knda", "laoo", "latn", "limb", "mlym", " mong", "mymr", "orya", "tamldec", "telu", "thai", "tibt"
+
+; signDisplay
+
+: when to display the sign for the number: //auto// to display for negative numbers only (default), //never// to never display sign, //always// to always display sign, //exceptZero// to display for positive and negative values but not zero
+
+; unit
+
+: unit to use if style = 'unit': no default, [[allowed values|https://tc39.es/proposal-unified-intl-numberformat/section6/locales-currencies-tz_proposed_out.html#sec-issanctionedsimpleunitidentifier]]
+
+; unitDisplay
+
+: unit formatting style: //short//, e.g., 16 l (default), //long//, e.g., 16 litres, //narrow//, e.g., 16l
+
+; useGrouping
+
+: whether to use grouping (e.g., thousands) separators: `true` (default), `false`-->
+
+!! Returns
+
+A formatted number (string).
+
+!! Examples
+
+* Plain numbers:<div>
+
+```
+<<number-format value:123456789>>
+```
+
+gives
+
+> 123,456,789
+</div>
+
+* Currency:<div>
+
+```
+<<number-format value:123456789 style:currency>>
+```
+
+gives
+
+> $123,456,789.00
+</div>
+
+!! Tiddlers
+
+* [[$:/plugins/.dtn/utility-macros/js/NumberFormat.js]]: macro definition.
