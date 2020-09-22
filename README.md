@@ -12,7 +12,7 @@ This plugin provides the macros:
 ### Single file wiki ##
 
 Install plugin file
-[$\_\_plugins\_.dtn\_utility-macros.tid](https://github.com/dnebauer/tw-utility-macros/blob/master/%24__plugins_.dtn_utility-macros.tid)
+[$\_\_plugins\_.dtn\_utility-macros.json](https://github.com/dnebauer/tw-utility-macros/blob/master/%24__plugins_.dtn_utility-macros.json)
 to a single file wiki by:
 
 * Dragging and dropping it into your wiki, or
